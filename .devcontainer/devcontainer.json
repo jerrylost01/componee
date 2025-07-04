@@ -1,5 +1,5 @@
 {
-  "name": "Custom VNC Desktop",
+  "name": "Custom VNC Desktop (zrok)",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
   "features": {
@@ -18,11 +18,10 @@
 
   "postCreateCommand": "sudo apt-get update && \
     sudo apt-get install -y wget pcmanfm && \
+    wget https://github.com/openziti/zrok/releases/download/v0.4.23/zrok_0.4.23_linux_amd64.tar.gz -O zrok.tar.gz && \
+    sudo tar -xvzf zrok.tar.gz -C /usr/local/bin && \
     sudo mkdir -p /usr/share/backgrounds && \
     sudo wget https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg -O /usr/share/backgrounds/codespace-wallpaper.jpeg && \
-    wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz -O ngrok.tgz && \
-    sudo tar -xvzf ngrok.tgz -C /usr/local/bin && \
-    ngrok config add-authtoken $NGROK_AUTHTOKEN && \
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     sudo apt install -y ./google-chrome-stable_current_amd64.deb && \
     mkdir -p /home/codespace/.fluxbox && \
