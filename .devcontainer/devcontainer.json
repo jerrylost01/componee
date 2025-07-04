@@ -1,12 +1,10 @@
-// .devcontainer/devcontainer.json
 {
-  "name": "Lightweight VNC Desktop",
-  // We are switching to a much smaller base image to save space
+  "name": "Custom VNC Desktop",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
   "features": {
     "ghcr.io/devcontainers/features/desktop-lite:1": {
-      "password": "codespace", // Your VNC password
+      "password": "codespace",
       "webPort": "6080"
     }
   },
@@ -18,6 +16,18 @@
     }
   },
 
-  // This command to install ngrok is still correct
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y wget && wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz -O ngrok.tgz && sudo tar -xvzf ngrok.tgz -C /usr/local/bin && ngrok config add-authtoken $NGROK_AUTHTOKEN"
+  "postCreateCommand": "sudo apt-get update && \
+    sudo apt-get install -y wget pcmanfm && \
+    sudo mkdir -p /usr/share/backgrounds && \
+    sudo wget https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg -O /usr/share/backgrounds/codespace-wallpaper.jpeg && \
+    wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz -O ngrok.tgz && \
+    sudo tar -xvzf ngrok.tgz -C /usr/local/bin && \
+    ngrok config add-authtoken $NGROK_AUTHTOKEN && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    sudo apt install -y ./google-chrome-stable_current_amd64.deb && \
+    mkdir -p /home/codespace/.fluxbox && \
+    echo 'pcmanfm --desktop &' >> /home/codespace/.fluxbox/startup && \
+    echo 'sleep 2 && pcmanfm --set-wallpaper=/usr/share/backgrounds/codespace-wallpaper.jpeg &' >> /home/codespace/.fluxbox/startup && \
+    mkdir -p /home/codespace/Desktop && \
+    cp /usr/share/applications/google-chrome.desktop /home/codespace/Desktop/"
 }
