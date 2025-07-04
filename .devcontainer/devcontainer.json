@@ -1,0 +1,23 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "Browser Desktop",
+  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+
+  "features": {
+    // This adds the graphical desktop feature
+    "ghcr.io/devcontainers/features/desktop-lite:1": {
+      "password": "codespace", // Your VNC password
+      "webPort": "6080"      // The port for the web client
+    }
+  },
+
+  // Forward the web client port so we can access it
+  "forwardPorts": [6080],
+
+  // Give the forwarded port a clear label in the UI
+  "portsAttributes": {
+    "6080": {
+      "label": "Desktop (Web)"
+    }
+  }
+}
