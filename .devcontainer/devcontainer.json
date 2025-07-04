@@ -1,23 +1,23 @@
 // .devcontainer/devcontainer.json
 {
-  "name": "Browser Desktop",
-  "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+  "name": "Lightweight VNC Desktop",
+  // We are switching to a much smaller base image to save space
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
   "features": {
-    // This adds the graphical desktop feature
     "ghcr.io/devcontainers/features/desktop-lite:1": {
       "password": "codespace", // Your VNC password
-      "webPort": "6080"      // The port for the web client
+      "webPort": "6080"
     }
   },
 
-  // Forward the web client port so we can access it
   "forwardPorts": [6080],
-
-  // Give the forwarded port a clear label in the UI
   "portsAttributes": {
     "6080": {
       "label": "Desktop (Web)"
     }
-  }
+  },
+
+  // This command to install ngrok is still correct
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y wget && wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz -O ngrok.tgz && sudo tar -xvzf ngrok.tgz -C /usr/local/bin && ngrok config add-authtoken $NGROK_AUTHTOKEN"
 }
