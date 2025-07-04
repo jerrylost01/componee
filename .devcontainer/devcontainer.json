@@ -16,17 +16,6 @@
     }
   },
 
-  "postCreateCommand": "sudo apt-get update && \
-    sudo apt-get install -y wget pcmanfm && \
-    wget https://github.com/openziti/zrok/releases/download/v0.4.23/zrok_0.4.23_linux_amd64.tar.gz -O zrok.tar.gz && \
-    sudo tar -xvzf zrok.tar.gz -C /usr/local/bin && \
-    sudo mkdir -p /usr/share/backgrounds && \
-    sudo wget https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg -O /usr/share/backgrounds/codespace-wallpaper.jpeg && \
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    sudo apt install -y ./google-chrome-stable_current_amd64.deb && \
-    mkdir -p /home/codespace/.fluxbox && \
-    echo 'pcmanfm --desktop &' >> /home/codespace/.fluxbox/startup && \
-    echo 'sleep 2 && pcmanfm --set-wallpaper=/usr/share/backgrounds/codespace-wallpaper.jpeg &' >> /home/codespace/.fluxbox/startup && \
-    mkdir -p /home/codespace/Desktop && \
-    cp /usr/share/applications/google-chrome.desktop /home/codespace/Desktop/"
+  // This command prints only the essential setup and run commands to the terminal.
+  "postAttachCommand": "echo -e \"\\n*** Desktop & Tunnel Commands ***\\n\\n\\e[32mzrok enable VUdBnkTfqTQx\\e[0m\\n\\n\\e[32mchmod +x setup_desktop.sh\\e[0m\\n\\e[32m./setup_desktop.sh\\e[0m\\n\\n\\e[32mzrok share tcp --backend-mode proxy localhost:5901\\e[0m\\n\""
 }
